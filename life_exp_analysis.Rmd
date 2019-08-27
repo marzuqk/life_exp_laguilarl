@@ -15,6 +15,8 @@ Here, I re-re-examine the analysis of Oeppen and Vaupel (2002).
 
 # Life Expectancy Analysis
 
+We will try two full solutions
+
 
 ```{r}
 library(tidyverse)
@@ -26,7 +28,7 @@ gapminder_unfiltered%>%
   summarize(maxlife = max(lifeExp, na.rm = TRUE)) -> cdf
 head(cdf)
   
-semi_join(cdf,gapminder_unfiltered, by = c("maxlife"= "lifeExp"))
+left_join(cdf,gapminder_unfiltered, by = c("maxlife"= "lifeExp"))
   
 
 gapminder_unfiltered%>%
@@ -35,11 +37,15 @@ gapminder_unfiltered%>%
   select(country, lifeExp, year)%>%
   arrange(year) -> sumdat
 
-
+head(sumdat)
   
 
 
 ```
+
+We will now recreate the plot from Oeppen and Vaupel(2002).
+
+
 
 # 1st Class Notes
 Other words for command line: shell, terminal, command line interface (cli), and console.
