@@ -1,8 +1,8 @@
 ---
 title: "613 Anaysis: Examining Life Expectancy"
 author: "Luis Aguilar Levy"
-date: "August 27, 2019"
-output: pdf_document
+date: "'r Sys.Date()'"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -11,14 +11,94 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Abstract
 
-Here, I re-examine the analysis of Oeppen and Vaupel (2002).
+Here, I re-re-examine the analysis of Oeppen and Vaupel (2002).
 
-# Analysis
+# Life Expectancy Analysis
 
 
-```{r cars}
+```{r}
+library(tidyverse)
+library(gapminder)
+data(gapminder_unfiltered)
+head(gapminder_unfiltered)
+gapminder_unfiltered%>% 
+  group_by(year)%>%
+  summarize(maxlife = max(lifeExp, na.rm = TRUE)) -> cdf
+head(cdf)
+  
+semi_join(cdf,gapminder_unfiltered, by = c("maxlife"= "lifeExp"))
+  
+
+gapminder_unfiltered%>%
+  group_by(year)%>%
+  filter(lifeExp == max(lifeExp))%>%
+  select(country, lifeExp, year)%>%
+  arrange(year) -> sumdat
+
+
+  
+
 
 ```
+
+# 1st Class Notes
+Other words for command line: shell, terminal, command line interface (cli), and console.
+
+These terms are technically slightly different.
+
+Bash: f x --y=1 #bash are functions
+ls: list files command
+pwd: shows which file you're at
+cd: cd and .. up one level
+linux subsytems
+ls --help : help 'a' flag means all
+cd
+cd ~/../../.. : it took me back outside the computer or 6 levels
+espcape spaces with a backslash '\'
+use 'tab' to outocomplete file names
+cp: copy file
+touch: creates blank file of what you list
+
+LAAL@DESKTOP-R7G4JGT MINGW64 ~/OneDrive/Documents/stat613/life_exp (master)
+$ touch temp.txt
+
+LAAL@DESKTOP-R7G4JGT MINGW64 ~/OneDrive/Documents/stat613/life_exp (master)
+$ cp temp.txt temp_new.txt
+
+rm: removes gile
+mv: rename files 
+mkdir: creates new directory
+rmdir: remove directory
+
+All git commands begin with git followed immediately by an argument for the type of command you want to execute.
+
+LAAL@DESKTOP-R7G4JGT MINGW64 ~/OneDrive/Documents/stat613/life_exp (master)
+$ git config --global user.name "laguilarl"
+
+LAAL@DESKTOP-R7G4JGT MINGW64 ~/OneDrive/Documents/stat613/life_exp (master)
+$ git config --global user.email "la2771a@student.american,edu"
+
+1 Repo for each homework
+
+git init
+git add file.rmd
+git status
+git diff
+Changes to be committed = staged files
+
+git reset: everything from stage gets removed 
+git commit -m "creates first rmd blank file"
+wihtout "-m" you'll go into VIM hell.
+Vim hell:
+  i to insert in VIM
+  escape + colon + wq to escape VIM
+
+q to exit
+
+
+
+
+
 
 ## Including Plots
 
