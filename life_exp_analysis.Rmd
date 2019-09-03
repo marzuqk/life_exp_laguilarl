@@ -36,8 +36,7 @@ gapminder_unfiltered%>%
   group_by(year)%>%
   filter(lifeExp == max(lifeExp))%>%
   select(country, lifeExp, year)%>%
-  arrange(year) 
-#-> sumdat
+  arrange(year) -> sumdat
 
 head(sumdat)
   
@@ -48,7 +47,12 @@ head(sumdat)
 We will now recreate the plot from Oeppen and Vaupel(2002).
 
 ```{r}
-
+sumdat %>%
+  ggplot(aes(x=year, y=lifeExp)) + 
+  geom_point(aes(fill=country), color="black", pch=21, size=3) + 
+  geom_smooth(method="lm", color="blue", se=FALSE) +
+  ylab("Life Expectancy") +
+  xlab("Year")
 ```
 
 git status
