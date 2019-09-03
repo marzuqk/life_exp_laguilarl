@@ -28,14 +28,16 @@ gapminder_unfiltered%>%
   summarize(maxlife = max(lifeExp, na.rm = TRUE)) -> cdf
 head(cdf)
   
-left_join(cdf,gapminder_unfiltered, by = c("maxlife"= "lifeExp"))
-  
+semi_join(gapminder_unfiltered, cdf, by = c("lifeExp"= "maxlife", "year"))%>%
+  arrange(year)
+
 
 gapminder_unfiltered%>%
   group_by(year)%>%
   filter(lifeExp == max(lifeExp))%>%
   select(country, lifeExp, year)%>%
-  arrange(year) -> sumdat
+  arrange(year) 
+#-> sumdat
 
 head(sumdat)
   
@@ -45,6 +47,14 @@ head(sumdat)
 
 We will now recreate the plot from Oeppen and Vaupel(2002).
 
+```{r}
+
+```
+
+git status
+git add
+git commit -m "final message to self"
+git push
 
 
 # 1st Class Notes
@@ -100,7 +110,7 @@ Vim hell:
   escape + colon + wq to escape VIM
 
 q to exit
-
+git add 
 
 
 
